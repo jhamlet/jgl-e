@@ -1,7 +1,7 @@
 {
     "name": "ope",
     "fullname": "Object Path Evaluator",
-    "description": "",
+    "description": "A library of classes to handle JSONGraph data",
     "version": "0.1.0",
     "keywords": ["json", "graph"],
     "main": "./lib/index.js",
