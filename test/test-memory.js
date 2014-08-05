@@ -5,18 +5,13 @@ var should = require('should'),
 describe('OPE.Memory', function () {
     var doc = {
             foo: {
-                bar: {
-                    0: {
-                        id: 'bob'
-                    },
-                    1: {
-                        id: 'marry'
-                    },
-                    length: 2
-                }
+                bar: [
+                    { id: 'bob' },
+                    { id: 'marry' }
+                ]
             },
-            bob: ['foo', 'bar', 0],
-            marry: ['foo', 'bar', 1]
+            bob: { '@ref': ['foo', 'bar', 0] },
+            marry: { '@ref': ['foo', 'bar', 1] }
         },
         pe = new MemoryObjectPathEvaluator(doc);
 
@@ -32,8 +27,8 @@ describe('OPE.Memory', function () {
                     next.
                         should.
                         eql([
-                            [['id'], doc.foo.bar[0]],
-                            [['id'], doc.foo.bar[1]]
+                            { path: ['id'], value: doc.foo.bar[0] },
+                            { path: ['id'], value: doc.foo.bar[1] }
                         ]);
                 },
                 function (error) {
@@ -53,9 +48,9 @@ describe('OPE.Memory', function () {
                     next.
                         should.
                         eql([
-                            [['length'], doc.foo.bar],
-                            [[0, 'id'], doc.foo.bar],
-                            [[1, 'id'], doc.foo.bar]
+                            { path: ['length'], value: doc.foo.bar },
+                            { path: [0, 'id'], value: doc.foo.bar },
+                            { path: [1, 'id'], value: doc.foo.bar }
                         ]);
                 },
                 function (error) {
