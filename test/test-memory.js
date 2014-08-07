@@ -22,13 +22,13 @@ describe('OPE.Memory', function () {
             toArray().
             subscribe(
                 function (next) {
-                    // We get each node twice since we our bound to both bob and
-                    // marry nodes
                     next.
                         should.
                         eql([
-                            { path: ['id'], value: doc.foo.bar[0] },
-                            { path: ['id'], value: doc.foo.bar[1] }
+                            { path: ['bob'], value: { '@ref': ['foo', 'bar', 0] } },
+                            { path: ['foo', 'bar', 0, 'id'], value: doc.foo.bar[0].id },
+                            { path: ['marry'], value: { '@ref': ['foo', 'bar', 1] } },
+                            { path: ['foo', 'bar', 1, 'id'], value: doc.foo.bar[1].id }
                         ]);
                 },
                 function (error) {
@@ -48,9 +48,9 @@ describe('OPE.Memory', function () {
                     next.
                         should.
                         eql([
-                            { path: ['length'], value: doc.foo.bar },
-                            { path: [0, 'id'], value: doc.foo.bar },
-                            { path: [1, 'id'], value: doc.foo.bar }
+                            { path: ['foo', 'bar', 'length'], value: doc.foo.bar.length },
+                            { path: ['foo', 'bar', 0, 'id'], value: doc.foo.bar[0].id },
+                            { path: ['foo', 'bar', 1, 'id'], value: doc.foo.bar[1].id }
                         ]);
                 },
                 function (error) {

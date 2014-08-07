@@ -1,7 +1,7 @@
 Object Path Evaluator
 =====================
 
-> 
+> A library of classes to handle JSONGraph data
 
 
 
