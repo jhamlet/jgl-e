@@ -17,21 +17,26 @@
 **Classes**
 
 * [class: ObjectPathEvaluator](#ObjectPathEvaluator)
-  * [objectPathEvaluator.path](#ObjectPathEvaluator#path)
   * [objectPathEvaluator.get([...path])](#ObjectPathEvaluator#get)
-  * [objectPathEvaluator.set([...pathValues])](#ObjectPathEvaluator#set)
+  * [objectPathEvaluator.set([...pv])](#ObjectPathEvaluator#set)
   * [objectPathEvaluator.del([...path])](#ObjectPathEvaluator#del)
   * [objectPathEvaluator.bind(path)](#ObjectPathEvaluator#bind)
   * [objectPathEvaluator.destroy()](#ObjectPathEvaluator#destroy)
+* [class: CachedObjectPathEvaluator](#CachedObjectPathEvaluator)
+  * [new CachedObjectPathEvaluator(opts)](#new_CachedObjectPathEvaluator)
+  * [cachedObjectPathEvaluator.get([...path])](#CachedObjectPathEvaluator#get)
+  * [cachedObjectPathEvaluator.set([...pv])](#CachedObjectPathEvaluator#set)
+  * [cachedObjectPathEvaluator.del([...path])](#CachedObjectPathEvaluator#del)
+  * [cachedObjectPathEvaluator.bind(path)](#CachedObjectPathEvaluator#bind)
+  * [cachedObjectPathEvaluator.destroy()](#CachedObjectPathEvaluator#destroy)
 * [class: MemoryObjectPathEvaluator](#MemoryObjectPathEvaluator)
   * [new MemoryObjectPathEvaluator([doc])](#new_MemoryObjectPathEvaluator)
   * [memoryObjectPathEvaluator.doc](#MemoryObjectPathEvaluator#doc)
-  * [memoryObjectPathEvaluator.path](#MemoryObjectPathEvaluator#path)
+  * [memoryObjectPathEvaluator.destroy()](#MemoryObjectPathEvaluator#destroy)
   * [memoryObjectPathEvaluator.get([...path])](#MemoryObjectPathEvaluator#get)
-  * [memoryObjectPathEvaluator.set([...pathValues])](#MemoryObjectPathEvaluator#set)
+  * [memoryObjectPathEvaluator.set([...pv])](#MemoryObjectPathEvaluator#set)
   * [memoryObjectPathEvaluator.del([...path])](#MemoryObjectPathEvaluator#del)
   * [memoryObjectPathEvaluator.bind(path)](#MemoryObjectPathEvaluator#bind)
-  * [memoryObjectPathEvaluator.destroy()](#MemoryObjectPathEvaluator#destroy)
 * [class: PatternOPEHandler](#PatternOPEHandler)
   * [new PatternOPEHandler(method, pattern, action)](#new_PatternOPEHandler)
   * [patternOPEHandler.method](#PatternOPEHandler#method)
@@ -48,10 +53,9 @@
   * [new PatternObjectPathEvaluator(...handler)](#new_PatternObjectPathEvaluator)
   * [PatternObjectPathEvaluator.Parser](#PatternObjectPathEvaluator.Parser)
   * [PatternObjectPathEvaluator.Handler](#PatternObjectPathEvaluator.Handler)
-  * [patternObjectPathEvaluator.path](#PatternObjectPathEvaluator#path)
   * [patternObjectPathEvaluator.handle(handlerOrMethod, [pattern], [action])](#PatternObjectPathEvaluator#handle)
   * [patternObjectPathEvaluator.get([...path])](#PatternObjectPathEvaluator#get)
-  * [patternObjectPathEvaluator.set([...pathValues])](#PatternObjectPathEvaluator#set)
+  * [patternObjectPathEvaluator.set([...pv])](#PatternObjectPathEvaluator#set)
   * [patternObjectPathEvaluator.del([...path])](#PatternObjectPathEvaluator#del)
   * [patternObjectPathEvaluator.bind(path)](#PatternObjectPathEvaluator#bind)
   * [patternObjectPathEvaluator.destroy()](#PatternObjectPathEvaluator#destroy)
@@ -69,6 +73,13 @@
   * [const: PatternOPEParser.INTEGERS](#PatternOPEParser.INTEGERS)
   * [type: PatternOPEParser~Argument](#PatternOPEParser..Argument)
   * [type: PatternOPEParser~Pattern](#PatternOPEParser..Pattern)
+* [class: RelativeObjectPathEvaluator](#RelativeObjectPathEvaluator)
+  * [new RelativeObjectPathEvaluator(proxy)](#new_RelativeObjectPathEvaluator)
+  * [relativeObjectPathEvaluator.get([...path])](#RelativeObjectPathEvaluator#get)
+  * [relativeObjectPathEvaluator.set([...pv])](#RelativeObjectPathEvaluator#set)
+  * [relativeObjectPathEvaluator.del([...path])](#RelativeObjectPathEvaluator#del)
+  * [relativeObjectPathEvaluator.bind(path)](#RelativeObjectPathEvaluator#bind)
+  * [relativeObjectPathEvaluator.destroy()](#RelativeObjectPathEvaluator#destroy)
  
 <a name="module_OPE"></a>
 #OPE
@@ -137,16 +148,12 @@ A concrete path. i.e: One that can not be expanded further.
 **Members**
 
 * [class: ObjectPathEvaluator](#ObjectPathEvaluator)
-  * [objectPathEvaluator.path](#ObjectPathEvaluator#path)
   * [objectPathEvaluator.get([...path])](#ObjectPathEvaluator#get)
-  * [objectPathEvaluator.set([...pathValues])](#ObjectPathEvaluator#set)
+  * [objectPathEvaluator.set([...pv])](#ObjectPathEvaluator#set)
   * [objectPathEvaluator.del([...path])](#ObjectPathEvaluator#del)
   * [objectPathEvaluator.bind(path)](#ObjectPathEvaluator#bind)
   * [objectPathEvaluator.destroy()](#ObjectPathEvaluator#destroy)
 
-<a name="ObjectPathEvaluator#path"></a>
-##objectPathEvaluator.path
-**Type**: [Query](#module_OPE..Query)  
 <a name="ObjectPathEvaluator#get"></a>
 ##objectPathEvaluator.get([...path])
 **Params**
@@ -155,10 +162,10 @@ A concrete path. i.e: One that can not be expanded further.
 
 **Returns**: `Rx.Observable.<module:OPE~PathValues>`  
 <a name="ObjectPathEvaluator#set"></a>
-##objectPathEvaluator.set([...pathValues])
+##objectPathEvaluator.set([...pv])
 **Params**
 
-- \[...pathValues\] <code>[PathValue](#module_OPE..PathValue)</code> - One ore more path-values to set  
+- \[...pv\] <code>[PathValue](#module_OPE..PathValue)</code> - One or more path-values to set  
 
 **Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_OPE..PathValue)  
 <a name="ObjectPathEvaluator#del"></a>
@@ -177,6 +184,58 @@ A concrete path. i.e: One that can not be expanded further.
 **Returns**: [ObjectPathEvaluator](#ObjectPathEvaluator) - An ObjectPathEvaluator bound to the given path  
 <a name="ObjectPathEvaluator#destroy"></a>
 ##objectPathEvaluator.destroy()
+<a name="CachedObjectPathEvaluator"></a>
+#class: CachedObjectPathEvaluator
+**Extends**: `ObjectPathEvaluator`  
+**Members**
+
+* [class: CachedObjectPathEvaluator](#CachedObjectPathEvaluator)
+  * [new CachedObjectPathEvaluator(opts)](#new_CachedObjectPathEvaluator)
+  * [cachedObjectPathEvaluator.get([...path])](#CachedObjectPathEvaluator#get)
+  * [cachedObjectPathEvaluator.set([...pv])](#CachedObjectPathEvaluator#set)
+  * [cachedObjectPathEvaluator.del([...path])](#CachedObjectPathEvaluator#del)
+  * [cachedObjectPathEvaluator.bind(path)](#CachedObjectPathEvaluator#bind)
+  * [cachedObjectPathEvaluator.destroy()](#CachedObjectPathEvaluator#destroy)
+
+<a name="new_CachedObjectPathEvaluator"></a>
+##new CachedObjectPathEvaluator(opts)
+**Params**
+
+- opts `Object`  
+  - cache <code>[ObjectPathEvaluator](#ObjectPathEvaluator)</code>  
+  - fallback <code>[ObjectPathEvaluator](#ObjectPathEvaluator)</code>  
+
+**Extends**: `ObjectPathEvaluator`  
+<a name="CachedObjectPathEvaluator#get"></a>
+##cachedObjectPathEvaluator.get([...path])
+**Params**
+
+- \[...path\] <code>[Query](#module_OPE..Query)</code> - One or more paths to retrieve  
+
+**Returns**: `Rx.Observable.<module:OPE~PathValues>`  
+<a name="CachedObjectPathEvaluator#set"></a>
+##cachedObjectPathEvaluator.set([...pv])
+**Params**
+
+- \[...pv\] <code>[PathValue](#module_OPE..PathValue)</code> - One or more path-values to set  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_OPE..PathValue)  
+<a name="CachedObjectPathEvaluator#del"></a>
+##cachedObjectPathEvaluator.del([...path])
+**Params**
+
+- \[...path\] <code>[Query](#module_OPE..Query)</code> - One or more paths to delete  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_OPE..PathValue)  
+<a name="CachedObjectPathEvaluator#bind"></a>
+##cachedObjectPathEvaluator.bind(path)
+**Params**
+
+- path <code>[Query](#module_OPE..Query)</code> - The path to bind to  
+
+**Returns**: [ObjectPathEvaluator](#ObjectPathEvaluator) - An ObjectPathEvaluator bound to the given path  
+<a name="CachedObjectPathEvaluator#destroy"></a>
+##cachedObjectPathEvaluator.destroy()
 <a name="MemoryObjectPathEvaluator"></a>
 #class: MemoryObjectPathEvaluator
 **Extends**: `ObjectPathEvaluator`  
@@ -185,12 +244,11 @@ A concrete path. i.e: One that can not be expanded further.
 * [class: MemoryObjectPathEvaluator](#MemoryObjectPathEvaluator)
   * [new MemoryObjectPathEvaluator([doc])](#new_MemoryObjectPathEvaluator)
   * [memoryObjectPathEvaluator.doc](#MemoryObjectPathEvaluator#doc)
-  * [memoryObjectPathEvaluator.path](#MemoryObjectPathEvaluator#path)
+  * [memoryObjectPathEvaluator.destroy()](#MemoryObjectPathEvaluator#destroy)
   * [memoryObjectPathEvaluator.get([...path])](#MemoryObjectPathEvaluator#get)
-  * [memoryObjectPathEvaluator.set([...pathValues])](#MemoryObjectPathEvaluator#set)
+  * [memoryObjectPathEvaluator.set([...pv])](#MemoryObjectPathEvaluator#set)
   * [memoryObjectPathEvaluator.del([...path])](#MemoryObjectPathEvaluator#del)
   * [memoryObjectPathEvaluator.bind(path)](#MemoryObjectPathEvaluator#bind)
-  * [memoryObjectPathEvaluator.destroy()](#MemoryObjectPathEvaluator#destroy)
 
 <a name="new_MemoryObjectPathEvaluator"></a>
 ##new MemoryObjectPathEvaluator([doc])
@@ -201,11 +259,9 @@ A concrete path. i.e: One that can not be expanded further.
 **Extends**: `ObjectPathEvaluator`  
 <a name="MemoryObjectPathEvaluator#doc"></a>
 ##memoryObjectPathEvaluator.doc
-**Type**: `Object`  
 **Default**: `{}`  
-<a name="MemoryObjectPathEvaluator#path"></a>
-##memoryObjectPathEvaluator.path
-**Type**: [Query](#module_OPE..Query)  
+<a name="MemoryObjectPathEvaluator#destroy"></a>
+##memoryObjectPathEvaluator.destroy()
 <a name="MemoryObjectPathEvaluator#get"></a>
 ##memoryObjectPathEvaluator.get([...path])
 **Params**
@@ -214,10 +270,10 @@ A concrete path. i.e: One that can not be expanded further.
 
 **Returns**: `Rx.Observable.<module:OPE~PathValues>`  
 <a name="MemoryObjectPathEvaluator#set"></a>
-##memoryObjectPathEvaluator.set([...pathValues])
+##memoryObjectPathEvaluator.set([...pv])
 **Params**
 
-- \[...pathValues\] <code>[PathValue](#module_OPE..PathValue)</code> - One ore more path-values to set  
+- \[...pv\] <code>[PathValue](#module_OPE..PathValue)</code> - One or more path-values to set  
 
 **Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_OPE..PathValue)  
 <a name="MemoryObjectPathEvaluator#del"></a>
@@ -234,8 +290,6 @@ A concrete path. i.e: One that can not be expanded further.
 - path <code>[Query](#module_OPE..Query)</code> - The path to bind to  
 
 **Returns**: [ObjectPathEvaluator](#ObjectPathEvaluator) - An ObjectPathEvaluator bound to the given path  
-<a name="MemoryObjectPathEvaluator#destroy"></a>
-##memoryObjectPathEvaluator.destroy()
 <a name="PatternOPEHandler"></a>
 #class: PatternOPEHandler
 **Members**
@@ -322,10 +376,9 @@ handler handles a particular query
   * [new PatternObjectPathEvaluator(...handler)](#new_PatternObjectPathEvaluator)
   * [PatternObjectPathEvaluator.Parser](#PatternObjectPathEvaluator.Parser)
   * [PatternObjectPathEvaluator.Handler](#PatternObjectPathEvaluator.Handler)
-  * [patternObjectPathEvaluator.path](#PatternObjectPathEvaluator#path)
   * [patternObjectPathEvaluator.handle(handlerOrMethod, [pattern], [action])](#PatternObjectPathEvaluator#handle)
   * [patternObjectPathEvaluator.get([...path])](#PatternObjectPathEvaluator#get)
-  * [patternObjectPathEvaluator.set([...pathValues])](#PatternObjectPathEvaluator#set)
+  * [patternObjectPathEvaluator.set([...pv])](#PatternObjectPathEvaluator#set)
   * [patternObjectPathEvaluator.del([...path])](#PatternObjectPathEvaluator#del)
   * [patternObjectPathEvaluator.bind(path)](#PatternObjectPathEvaluator#bind)
   * [patternObjectPathEvaluator.destroy()](#PatternObjectPathEvaluator#destroy)
@@ -341,9 +394,6 @@ handler handles a particular query
 ##PatternObjectPathEvaluator.Parser
 <a name="PatternObjectPathEvaluator.Handler"></a>
 ##PatternObjectPathEvaluator.Handler
-<a name="PatternObjectPathEvaluator#path"></a>
-##patternObjectPathEvaluator.path
-**Type**: [Query](#module_OPE..Query)  
 <a name="PatternObjectPathEvaluator#handle"></a>
 ##patternObjectPathEvaluator.handle(handlerOrMethod, [pattern], [action])
 Add a new handler for a OPEndPoint
@@ -363,10 +413,10 @@ Add a new handler for a OPEndPoint
 
 **Returns**: `Rx.Observable.<module:OPE~PathValues>`  
 <a name="PatternObjectPathEvaluator#set"></a>
-##patternObjectPathEvaluator.set([...pathValues])
+##patternObjectPathEvaluator.set([...pv])
 **Params**
 
-- \[...pathValues\] <code>[PathValue](#module_OPE..PathValue)</code> - One ore more path-values to set  
+- \[...pv\] <code>[PathValue](#module_OPE..PathValue)</code> - One or more path-values to set  
 
 **Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_OPE..PathValue)  
 <a name="PatternObjectPathEvaluator#del"></a>
@@ -489,3 +539,53 @@ returned.
 ##type: PatternOPEParser~Pattern
 **Scope**: inner typedef of [PatternOPEParser](#PatternOPEParser)  
 **Type**: [Array.&lt;Argument&gt;](#PatternOPEParser..Argument)  
+<a name="RelativeObjectPathEvaluator"></a>
+#class: RelativeObjectPathEvaluator
+**Extends**: `ObjectPathEvaluator`  
+**Members**
+
+* [class: RelativeObjectPathEvaluator](#RelativeObjectPathEvaluator)
+  * [new RelativeObjectPathEvaluator(proxy)](#new_RelativeObjectPathEvaluator)
+  * [relativeObjectPathEvaluator.get([...path])](#RelativeObjectPathEvaluator#get)
+  * [relativeObjectPathEvaluator.set([...pv])](#RelativeObjectPathEvaluator#set)
+  * [relativeObjectPathEvaluator.del([...path])](#RelativeObjectPathEvaluator#del)
+  * [relativeObjectPathEvaluator.bind(path)](#RelativeObjectPathEvaluator#bind)
+  * [relativeObjectPathEvaluator.destroy()](#RelativeObjectPathEvaluator#destroy)
+
+<a name="new_RelativeObjectPathEvaluator"></a>
+##new RelativeObjectPathEvaluator(proxy)
+**Params**
+
+- proxy `Object`  
+
+**Extends**: `ObjectPathEvaluator`  
+<a name="RelativeObjectPathEvaluator#get"></a>
+##relativeObjectPathEvaluator.get([...path])
+**Params**
+
+- \[...path\] <code>[Query](#module_OPE..Query)</code> - One or more paths to retrieve  
+
+**Returns**: `Rx.Observable.<module:OPE~PathValues>`  
+<a name="RelativeObjectPathEvaluator#set"></a>
+##relativeObjectPathEvaluator.set([...pv])
+**Params**
+
+- \[...pv\] <code>[PathValue](#module_OPE..PathValue)</code> - One or more path-values to set  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_OPE..PathValue)  
+<a name="RelativeObjectPathEvaluator#del"></a>
+##relativeObjectPathEvaluator.del([...path])
+**Params**
+
+- \[...path\] <code>[Query](#module_OPE..Query)</code> - One or more paths to delete  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_OPE..PathValue)  
+<a name="RelativeObjectPathEvaluator#bind"></a>
+##relativeObjectPathEvaluator.bind(path)
+**Params**
+
+- path <code>[Query](#module_OPE..Query)</code> - The path to bind to  
+
+**Returns**: [ObjectPathEvaluator](#ObjectPathEvaluator) - An ObjectPathEvaluator bound to the given path  
+<a name="RelativeObjectPathEvaluator#destroy"></a>
+##relativeObjectPathEvaluator.destroy()

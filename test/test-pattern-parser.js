@@ -34,7 +34,7 @@ describe('OPE.Pattern.Parser', function () {
 
     describe('#match()', function () {
         it('should match a path and return the matches as nested arrays', function () {
-            var p = new Parser('foo', 'bar', Parser.integersOrRange);
+            var p = new Parser('foo', 'bar', Parser.INTEGERS);
 
             p.match(['foo', 'bar', [1, 2, 3]]).
                 should.
