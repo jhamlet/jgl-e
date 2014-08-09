@@ -1,7 +1,7 @@
-Object Path Evaluator
-=====================
+JSON Graph Evaluator
+====================
 
-> A library of classes to handle JSONGraph data
+> A library of classes to handle querying JSONGraph data asynchronously
 
 
 
@@ -15,7 +15,7 @@ Installation
 ------------
 
 ~~~
-% npm install ope
+% npm install jgl-e
 ~~~
 
 
@@ -31,12 +31,12 @@ Documentation
 Dependencies
 ------------
 
-These are installed when **ope** is installed.
+These are installed when **jgl-e** is installed.
 
 ~~~
 underscore: 1.x.x
 rx:         2.x.x
-opl:        0.x.x
+jgl:        0.x.x
 protean:    0.x.x
 ~~~
 
@@ -61,7 +61,7 @@ jsdoc-to-markdown: 0.x.x
 Report an Issue
 ---------------
 
-* [Bugs](http://github.com/jhamlet/ope/issues)
+* [Bugs](http://github.com/jhamlet/jgl-e/issues)
 * Contact the author: <jerry@hamletink.com>
 
 

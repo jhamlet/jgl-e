@@ -1,14 +1,14 @@
 {
-    "name": "ope",
-    "fullname": "Object Path Evaluator",
-    "description": "A library of classes to handle JSONGraph data",
+    "name": "jgl-e",
+    "fullname": "JSON Graph Evaluator",
+    "description": "A library of classes to handle querying JSONGraph data asynchronously",
     "version": "0.1.0",
-    "keywords": ["json", "graph"],
+    "keywords": ["json", "graph", "evaluator"],
     "main": "./lib/index.js",
     "dependencies": {
         "underscore":   "1.x.x",
         "rx":           "2.x.x",
-        "opl":          "0.x.x",
+        "jgl":          "0.x.x",
         "protean":      "0.x.x"
     },
     "devDependencies": {
@@ -30,14 +30,14 @@
     "licenses": [
         {
             "type": "MIT",
-            "url": "http://github.com/jhamlet/ope/raw/master/LICENSE"
+            "url": "http://github.com/jhamlet/jgl-e/raw/master/LICENSE"
         }
     ],
     "repository": {
         "type": "git",
-        "url": "http://github.com/jhamlet/ope.git"
+        "url": "http://github.com/jhamlet/jgl-e.git"
     },
     "bugs": {
-        "url": "http://github.com/jhamlet/ope/issues"
+        "url": "http://github.com/jhamlet/jgl-e/issues"
     }
 }
