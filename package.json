@@ -3,7 +3,7 @@
     "fullname": "JSON Graph Evaluator",
     "description": "A library of classes to handle querying JSONGraph data asynchronously",
     "version": "0.1.0",
-    "keywords": ["json", "graph", "evaluator"],
+    "keywords": ["jgl", "json", "graph", "evaluator", "language"],
     "main": "./lib/index.js",
     "dependencies": {
         "underscore":   "1.x.x",
