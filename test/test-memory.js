@@ -1,19 +1,34 @@
 /*globals describe, it */
 var should = require('should'),
-    MemoryObjectPathEvaluator = require('../').Memory;
+    MemoryJGLEvaluator = require('../').Memory;
 
-describe('OPE.Memory', function () {
+describe('MemoryJGLEvaluator', function () {
     var doc = {
             foo: {
-                bar: [
-                    { id: 'bob' },
-                    { id: 'marry' }
-                ]
+                bar: {
+                    0: { id: 'bob' },
+                    1: { id: 'marry' },
+                    length: 2
+                }
             },
             bob: { '@ref': ['foo', 'bar', 0] },
-            marry: { '@ref': ['foo', 'bar', 1] }
+            marry: { '@ref': ['foo', 'bar', 1] },
+
+            people: {
+                0: { '@ref': ['bob'] },
+                1: { '@ref': ['marry'] },
+                length: 2
+            },
+
+            groups: {
+                0: {
+                    0: { '@ref': ['people', 0] },
+                    1: { '@ref': ['people', 1] },
+                    length: 2
+                }
+            }
         },
-        pe = new MemoryObjectPathEvaluator(doc);
+        pe = new MemoryJGLEvaluator(doc);
 
     it('should...', function (done) {
         var src = pe.bind([['bob', 'marry']]);
@@ -25,10 +40,8 @@ describe('OPE.Memory', function () {
                     next.
                         should.
                         eql([
-                            { path: ['bob'], value: { '@ref': ['foo', 'bar', 0] } },
-                            { path: ['foo', 'bar', 0, 'id'], value: doc.foo.bar[0].id },
-                            { path: ['marry'], value: { '@ref': ['foo', 'bar', 1] } },
-                            { path: ['foo', 'bar', 1, 'id'], value: doc.foo.bar[1].id }
+                            { path: ['id'], value: doc.foo.bar[0] },
+                            { path: ['id'], value: doc.foo.bar[1] }
                         ]);
                 },
                 function (error) {
@@ -41,16 +54,48 @@ describe('OPE.Memory', function () {
     it('should...', function (done) {
         var src = pe.bind(['foo', 'bar']);
 
-        src.get(['length'], [{to: 1}, 'id']).
+        src.get([{to: 1}, 'id']).
             toArray().
             subscribe(
                 function (next) {
                     next.
                         should.
                         eql([
-                            { path: ['foo', 'bar', 'length'], value: doc.foo.bar.length },
-                            { path: ['foo', 'bar', 0, 'id'], value: doc.foo.bar[0].id },
-                            { path: ['foo', 'bar', 1, 'id'], value: doc.foo.bar[1].id }
+                            {
+                                path: [0, 'id'],
+                                value: {
+                                    0: doc.foo.bar[0],
+                                    1: doc.foo.bar[1]
+                                }
+                            },
+                            {
+                                path: [1, 'id'],
+                                value: {
+                                    0: doc.foo.bar[0],
+                                    1: doc.foo.bar[1]
+                                }
+                            }
+                        ]);
+                },
+                function (error) {
+                    throw error;
+                },
+                done
+            );
+    });
+
+    it('should...', function (done) {
+        var src = pe.bind(['groups', 0, {to: 1}]);
+
+        src.get(['id']).
+            toArray().
+            subscribe(
+                function (next) {
+                    next.
+                        should.
+                        eql([
+                            { path: ['id'], value: doc.foo.bar[0] },
+                            { path: ['id'], value: doc.foo.bar[1] }
                         ]);
                 },
                 function (error) {

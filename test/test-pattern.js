@@ -1,11 +1,11 @@
 /*globals describe, it */
 var should = require('should'),
     Rx = require('rx'),
-    PatternOPEvaluator = require('../').Pattern,
-    POPEParser = PatternOPEvaluator.Parser,
-    POPEHandler = PatternOPEvaluator.Handler;
+    PatternJGLEvaluator = require('../').Pattern,
+    Parser = PatternJGLEvaluator.Parser,
+    Handler = PatternJGLEvaluator.Handler;
 
-describe('OPE.Memory', function () {
+describe('PatternJGLEvaluator', function () {
     var doc = {
             foo: {
                 bar: [
@@ -24,10 +24,10 @@ describe('OPE.Memory', function () {
                 ]
             ]
         },
-        pe = new PatternOPEvaluator(
+        pe = new PatternJGLEvaluator(
             [
-                POPEHandler.GET,
-                ['foo', 'bar', POPEParser.INTEGERS, 'id'],
+                Handler.GET,
+                ['foo', 'bar', Parser.INTEGERS, 'id'],
                 function (query) {
                     var indices = query[2];
 
@@ -42,7 +42,7 @@ describe('OPE.Memory', function () {
                 }
             ],
             [
-                POPEHandler.GET,
+                Handler.GET,
                 ['foo', 'bar', 'length'],
                 function () {
                     return Rx.Observable.
@@ -53,7 +53,7 @@ describe('OPE.Memory', function () {
                 }
             ],
             [
-                POPEHandler.GET,
+                Handler.GET,
                 [['bob', 'marry']],
                 function (query) {
                     var list = doc.foo.bar;
@@ -78,8 +78,8 @@ describe('OPE.Memory', function () {
                 }
             ],
             [
-                POPEHandler.GET,
-                ['people', POPEParser.INTEGERS],
+                Handler.GET,
+                ['people', Parser.INTEGERS],
                 function (query) {
                     return Rx.Observable.
                         fromArray(query[1]).
@@ -92,8 +92,8 @@ describe('OPE.Memory', function () {
                 }
             ],
             [
-                POPEHandler.GET,
-                ['groups', POPEParser.INTEGERS, POPEParser.INTEGERS],
+                Handler.GET,
+                ['groups', Parser.INTEGERS, Parser.INTEGERS],
                 function (query) {
                     return Rx.Observable.
                         fromArray(query[1]).
@@ -112,19 +112,17 @@ describe('OPE.Memory', function () {
         );
 
     it('should handle references', function (done) {
-        var src = pe.bind([['bob', 'marry']]);
+        var expectedValue = { bob: { id: 'bob' }, marry: { id: 'marry' } };
 
-        src.get(['id']).
+        pe.get([['bob', 'marry'], 'id']).
             toArray().
             subscribe(
                 function (next) {
                     next.
                         should.
                         eql([
-                            { path: ['bob'], value: { '@ref': ['foo', 'bar', 0] } },
-                            { path: ['foo', 'bar', 0, 'id'], value: 'bob' },
-                            { path: ['marry'], value: { '@ref': ['foo', 'bar', 1] } },
-                            { path: ['foo', 'bar', 1, 'id'], value: 'marry' }
+                            { path: ['bob', 'id'], value: expectedValue },
+                            { path: ['marry', 'id'], value: expectedValue }
                         ]);
                 },
                 function (error) {
@@ -135,21 +133,22 @@ describe('OPE.Memory', function () {
     });
 
     it('should handle multiple references', function (done) {
-        var src = pe.bind(['people', {to: 1}]);
+        var expectedValue = {
+                people: {
+                    0: { id: 'bob' },
+                    1: { id: 'marry'}
+                }
+            };
 
-        src.get(['id']).
+        pe.get(['people', {to: 1}, 'id']).
             toArray().
             subscribe(
                 function (next) {
                     next.
                         should.
                         eql([
-                            { path: ['people', 0], value: { '@ref': ['bob'] } },
-                            { path: ['bob'], value: { '@ref': ['foo', 'bar', 0] } },
-                            { path: ['foo', 'bar', 0, 'id'], value: 'bob' },
-                            { path: ['people', 1], value: { '@ref': ['marry'] } },
-                            { path: ['marry'], value: { '@ref': ['foo', 'bar', 1] } },
-                            { path: ['foo', 'bar', 1, 'id'], value: 'marry' }
+                            { path: ['people', 0, 'id'], value: expectedValue },
+                            { path: ['people', 1, 'id'], value: expectedValue }
                         ]);
                 },
                 function (error) {
@@ -160,23 +159,24 @@ describe('OPE.Memory', function () {
     });
 
     it('should handle deep references', function (done) {
-        var src = pe.bind(['groups', {to: 0}, {to: 1}]);
+        var expectedValue = {
+                groups: {
+                    0: {
+                        0: { id: 'bob' },
+                        1: { id: 'marry' }
+                    }
+                }
+            };
 
-        src.get(['id']).
+        pe.get(['groups', {to: 0}, {to: 1}, 'id']).
             toArray().
             subscribe(
                 function (next) {
                     next.
                         should.
                         eql([
-                            { path: ['groups', 0, 0], value: { '@ref': ['people', 0] } },
-                            { path: ['people', 0], value: { '@ref': ['bob'] } },
-                            { path: ['bob'], value: { '@ref': ['foo', 'bar', 0] } },
-                            { path: ['foo', 'bar', 0, 'id'], value: 'bob' },
-                            { path: ['groups', 0, 1], value: { '@ref': ['people', 1] } },
-                            { path: ['people', 1], value: { '@ref': ['marry'] } },
-                            { path: ['marry'], value: { '@ref': ['foo', 'bar', 1] } },
-                            { path: ['foo', 'bar', 1, 'id'], value: 'marry' }
+                            { path: ['groups', 0, 0, 'id'], value: expectedValue },
+                            { path: ['groups', 0, 1, 'id'], value: expectedValue }
                         ]);
                 },
                 function (error) {
@@ -187,18 +187,34 @@ describe('OPE.Memory', function () {
     });
 
     it('should return path values', function (done) {
-        var src = pe.bind(['foo', 'bar']);
+        var expectedValue = {
+                foo: {
+                    bar: {
+                        0: { id: 'bob' },
+                        1: { id: 'marry' }
+                    }
+                }
+            };
 
-        src.get(['length'], [{to: 1}, 'id']).
+        pe.get(['foo', 'bar', 'length'], ['foo', 'bar', {to: 1}, 'id']).
             toArray().
             subscribe(
                 function (next) {
                     next.
                         should.
                         eql([
-                            { path: ['foo', 'bar', 'length'], value: 2 },
-                            { path: ['foo', 'bar', 0, 'id'], value: 'bob' },
-                            { path: ['foo', 'bar', 1, 'id'], value: 'marry' },
+                            {
+                                path: ['foo', 'bar', 'length'],
+                                value: {
+                                    foo: {
+                                        bar: {
+                                            length: 2
+                                        }
+                                    }
+                                }
+                            },
+                            { path: ['foo', 'bar', 0, 'id'], value: expectedValue },
+                            { path: ['foo', 'bar', 1, 'id'], value: expectedValue },
                         ]);
                 },
                 function (error) {

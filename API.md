@@ -13,74 +13,81 @@
   * [type: JGLEvaluator~QuerySegment](#module_JGLEvaluator..QuerySegment)
   * [type: JGLEvaluator~Query](#module_JGLEvaluator..Query)
   * [type: JGLEvaluator~Path](#module_JGLEvaluator..Path)
+  * [type: JGLEvaluator~Value](#module_JGLEvaluator..Value)
   * [type: JGLEvaluator~PathValue](#module_JGLEvaluator..PathValue)
 
 **Classes**
 
 * [class: JGLEvaluator](#JGLEvaluator)
-  * [jGLEvaluator.get([...path])](#JGLEvaluator#get)
-  * [jGLEvaluator.set([...pv])](#JGLEvaluator#set)
-  * [jGLEvaluator.del([...path])](#JGLEvaluator#del)
+  * [new JGLEvaluator([path])](#new_JGLEvaluator)
+  * [jGLEvaluator.path](#JGLEvaluator#path)
   * [jGLEvaluator.bind(path)](#JGLEvaluator#bind)
+  * [jGLEvaluator.get([obs], [...path])](#JGLEvaluator#get)
+  * [jGLEvaluator.set([...pv], [obs])](#JGLEvaluator#set)
+  * [jGLEvaluator.del([obs], [...path])](#JGLEvaluator#del)
   * [jGLEvaluator.destroy()](#JGLEvaluator#destroy)
-* [class: JGLCachedEvaluator](#JGLCachedEvaluator)
-  * [new JGLCachedEvaluator(opts)](#new_JGLCachedEvaluator)
-  * [jGLCachedEvaluator.get([...path])](#JGLCachedEvaluator#get)
-  * [jGLCachedEvaluator.set([...pv])](#JGLCachedEvaluator#set)
-  * [jGLCachedEvaluator.del([...path])](#JGLCachedEvaluator#del)
-  * [jGLCachedEvaluator.bind(path)](#JGLCachedEvaluator#bind)
-  * [jGLCachedEvaluator.destroy()](#JGLCachedEvaluator#destroy)
-* [class: JGLMemoryEvaluator](#JGLMemoryEvaluator)
-  * [new JGLMemoryEvaluator([graph])](#new_JGLMemoryEvaluator)
-  * [jGLMemoryEvaluator.graph](#JGLMemoryEvaluator#graph)
-  * [jGLMemoryEvaluator.destroy()](#JGLMemoryEvaluator#destroy)
-  * [jGLMemoryEvaluator.get([...path])](#JGLMemoryEvaluator#get)
-  * [jGLMemoryEvaluator.set([...pv])](#JGLMemoryEvaluator#set)
-  * [jGLMemoryEvaluator.del([...path])](#JGLMemoryEvaluator#del)
-  * [jGLMemoryEvaluator.bind(path)](#JGLMemoryEvaluator#bind)
-* [class: JGLPatternEvaluatorHandler](#JGLPatternEvaluatorHandler)
-  * [new JGLPatternEvaluatorHandler(method, pattern, action)](#new_JGLPatternEvaluatorHandler)
-  * [jGLPatternEvaluatorHandler.method](#JGLPatternEvaluatorHandler#method)
-  * [jGLPatternEvaluatorHandler.pattern](#JGLPatternEvaluatorHandler#pattern)
-  * [jGLPatternEvaluatorHandler.parser](#JGLPatternEvaluatorHandler#parser)
-  * [jGLPatternEvaluatorHandler.run(query, [value])](#JGLPatternEvaluatorHandler#run)
-  * [jGLPatternEvaluatorHandler.match(method, query)](#JGLPatternEvaluatorHandler#match)
-  * [const: JGLPatternEvaluatorHandler.GET](#JGLPatternEvaluatorHandler.GET)
-  * [const: JGLPatternEvaluatorHandler.SET](#JGLPatternEvaluatorHandler.SET)
-  * [const: JGLPatternEvaluatorHandler.DEL](#JGLPatternEvaluatorHandler.DEL)
-  * [callback: JGLPatternEvaluatorHandler~Action](#JGLPatternEvaluatorHandler..Action)
-  * [type: JGLPatternEvaluatorHandler~Method](#JGLPatternEvaluatorHandler..Method)
-* [class: JGLPatternEvaluator](#JGLPatternEvaluator)
-  * [new JGLPatternEvaluator(...handler)](#new_JGLPatternEvaluator)
-  * [JGLPatternEvaluator.Parser](#JGLPatternEvaluator.Parser)
-  * [JGLPatternEvaluator.Handler](#JGLPatternEvaluator.Handler)
-  * [jGLPatternEvaluator.handle(handlerOrMethod, [pattern], [action])](#JGLPatternEvaluator#handle)
-  * [jGLPatternEvaluator.get([...path])](#JGLPatternEvaluator#get)
-  * [jGLPatternEvaluator.set([...pv])](#JGLPatternEvaluator#set)
-  * [jGLPatternEvaluator.del([...path])](#JGLPatternEvaluator#del)
-  * [jGLPatternEvaluator.bind(path)](#JGLPatternEvaluator#bind)
-  * [jGLPatternEvaluator.destroy()](#JGLPatternEvaluator#destroy)
-* [class: JGLPatternEvaluatorParser](#JGLPatternEvaluatorParser)
-  * [new JGLPatternEvaluatorParser(...segment)](#new_JGLPatternEvaluatorParser)
-  * [jGLPatternEvaluatorParser.segments](#JGLPatternEvaluatorParser#segments)
-  * [JGLPatternEvaluatorParser.isInteger](#JGLPatternEvaluatorParser.isInteger)
-  * [JGLPatternEvaluatorParser.isIntegers](#JGLPatternEvaluatorParser.isIntegers)
-  * [JGLPatternEvaluatorParser.isRange](#JGLPatternEvaluatorParser.isRange)
-  * [JGLPatternEvaluatorParser.isIntegersOrRange](#JGLPatternEvaluatorParser.isIntegersOrRange)
-  * [JGLPatternEvaluatorParser.isKey](#JGLPatternEvaluatorParser.isKey)
-  * [JGLPatternEvaluatorParser.isKeys](#JGLPatternEvaluatorParser.isKeys)
-  * [jGLPatternEvaluatorParser.match(query)](#JGLPatternEvaluatorParser#match)
-  * [const: JGLPatternEvaluatorParser.KEYS](#JGLPatternEvaluatorParser.KEYS)
-  * [const: JGLPatternEvaluatorParser.INTEGERS](#JGLPatternEvaluatorParser.INTEGERS)
-  * [type: JGLPatternEvaluatorParser~Argument](#JGLPatternEvaluatorParser..Argument)
-  * [type: JGLPatternEvaluatorParser~Pattern](#JGLPatternEvaluatorParser..Pattern)
-* [class: JGLRelativeEvaluator](#JGLRelativeEvaluator)
-  * [new JGLRelativeEvaluator(proxy)](#new_JGLRelativeEvaluator)
-  * [jGLRelativeEvaluator.get([...path])](#JGLRelativeEvaluator#get)
-  * [jGLRelativeEvaluator.set([...pv])](#JGLRelativeEvaluator#set)
-  * [jGLRelativeEvaluator.del([...path])](#JGLRelativeEvaluator#del)
-  * [jGLRelativeEvaluator.bind(path)](#JGLRelativeEvaluator#bind)
-  * [jGLRelativeEvaluator.destroy()](#JGLRelativeEvaluator#destroy)
+* [class: BoundJGLEvaluator](#BoundJGLEvaluator)
+  * [boundJGLEvaluator.path](#BoundJGLEvaluator#path)
+  * [boundJGLEvaluator.get([obs], [...path])](#BoundJGLEvaluator#get)
+  * [boundJGLEvaluator.set([obs], [...pv])](#BoundJGLEvaluator#set)
+  * [boundJGLEvaluator.del([obs], [...path])](#BoundJGLEvaluator#del)
+  * [boundJGLEvaluator.bind(path)](#BoundJGLEvaluator#bind)
+  * [boundJGLEvaluator.destroy()](#BoundJGLEvaluator#destroy)
+  * [type: BoundJGLEvaluator~PathValue](#BoundJGLEvaluator..PathValue)
+* [class: CachedJGLEvaluator](#CachedJGLEvaluator)
+  * [new CachedJGLEvaluator(opts)](#new_CachedJGLEvaluator)
+  * [cachedJGLEvaluator.path](#CachedJGLEvaluator#path)
+  * [cachedJGLEvaluator.bind(path)](#CachedJGLEvaluator#bind)
+  * [cachedJGLEvaluator.get([obs], [...path])](#CachedJGLEvaluator#get)
+  * [cachedJGLEvaluator.set([...pv], [obs])](#CachedJGLEvaluator#set)
+  * [cachedJGLEvaluator.del([obs], [...path])](#CachedJGLEvaluator#del)
+  * [cachedJGLEvaluator.destroy()](#CachedJGLEvaluator#destroy)
+* [class: MemoryJGLEvaluator](#MemoryJGLEvaluator)
+  * [new MemoryJGLEvaluator([graph], [path])](#new_MemoryJGLEvaluator)
+  * [memoryJGLEvaluator.graph](#MemoryJGLEvaluator#graph)
+  * [memoryJGLEvaluator.path](#MemoryJGLEvaluator#path)
+  * [memoryJGLEvaluator.destroy()](#MemoryJGLEvaluator#destroy)
+  * [memoryJGLEvaluator.bind(path)](#MemoryJGLEvaluator#bind)
+  * [memoryJGLEvaluator.get([obs], [...path])](#MemoryJGLEvaluator#get)
+  * [memoryJGLEvaluator.set([...pv], [obs])](#MemoryJGLEvaluator#set)
+  * [memoryJGLEvaluator.del([obs], [...path])](#MemoryJGLEvaluator#del)
+* [class: PatternJGLEvaluatorHandler](#PatternJGLEvaluatorHandler)
+  * [new PatternJGLEvaluatorHandler(method, pattern, action)](#new_PatternJGLEvaluatorHandler)
+  * [patternJGLEvaluatorHandler.method](#PatternJGLEvaluatorHandler#method)
+  * [patternJGLEvaluatorHandler.pattern](#PatternJGLEvaluatorHandler#pattern)
+  * [patternJGLEvaluatorHandler.parser](#PatternJGLEvaluatorHandler#parser)
+  * [patternJGLEvaluatorHandler.run(query, [value])](#PatternJGLEvaluatorHandler#run)
+  * [patternJGLEvaluatorHandler.match(method, query)](#PatternJGLEvaluatorHandler#match)
+  * [const: PatternJGLEvaluatorHandler.GET](#PatternJGLEvaluatorHandler.GET)
+  * [const: PatternJGLEvaluatorHandler.SET](#PatternJGLEvaluatorHandler.SET)
+  * [const: PatternJGLEvaluatorHandler.DEL](#PatternJGLEvaluatorHandler.DEL)
+  * [callback: PatternJGLEvaluatorHandler~Action](#PatternJGLEvaluatorHandler..Action)
+  * [type: PatternJGLEvaluatorHandler~Method](#PatternJGLEvaluatorHandler..Method)
+* [class: PatternJGLEvaluator](#PatternJGLEvaluator)
+  * [new PatternJGLEvaluator(...handler)](#new_PatternJGLEvaluator)
+  * [PatternJGLEvaluator.Parser](#PatternJGLEvaluator.Parser)
+  * [PatternJGLEvaluator.Handler](#PatternJGLEvaluator.Handler)
+  * [patternJGLEvaluator.path](#PatternJGLEvaluator#path)
+  * [patternJGLEvaluator.handle(handlerOrMethod, [pattern], [action])](#PatternJGLEvaluator#handle)
+  * [patternJGLEvaluator.bind(path)](#PatternJGLEvaluator#bind)
+  * [patternJGLEvaluator.get([obs], [...path])](#PatternJGLEvaluator#get)
+  * [patternJGLEvaluator.set([...pv], [obs])](#PatternJGLEvaluator#set)
+  * [patternJGLEvaluator.del([obs], [...path])](#PatternJGLEvaluator#del)
+  * [patternJGLEvaluator.destroy()](#PatternJGLEvaluator#destroy)
+* [class: PatternJGLEvaluatorParser](#PatternJGLEvaluatorParser)
+  * [new PatternJGLEvaluatorParser(...segment)](#new_PatternJGLEvaluatorParser)
+  * [patternJGLEvaluatorParser.segments](#PatternJGLEvaluatorParser#segments)
+  * [PatternJGLEvaluatorParser.isInteger(val)](#PatternJGLEvaluatorParser.isInteger)
+  * [PatternJGLEvaluatorParser.isIntegers(val)](#PatternJGLEvaluatorParser.isIntegers)
+  * [PatternJGLEvaluatorParser.isRange(val)](#PatternJGLEvaluatorParser.isRange)
+  * [PatternJGLEvaluatorParser.isIntegersOrRange(val)](#PatternJGLEvaluatorParser.isIntegersOrRange)
+  * [PatternJGLEvaluatorParser.isKey(val)](#PatternJGLEvaluatorParser.isKey)
+  * [PatternJGLEvaluatorParser.isKeys(val)](#PatternJGLEvaluatorParser.isKeys)
+  * [patternJGLEvaluatorParser.match(query)](#PatternJGLEvaluatorParser#match)
+  * [const: PatternJGLEvaluatorParser.KEYS](#PatternJGLEvaluatorParser.KEYS)
+  * [const: PatternJGLEvaluatorParser.INTEGERS](#PatternJGLEvaluatorParser.INTEGERS)
+  * [type: PatternJGLEvaluatorParser~Argument](#PatternJGLEvaluatorParser..Argument)
+  * [type: PatternJGLEvaluatorParser~Pattern](#PatternJGLEvaluatorParser..Pattern)
  
 <a name="module_JGLEvaluator"></a>
 #JGLEvaluator
@@ -97,6 +104,7 @@
   * [type: JGLEvaluator~QuerySegment](#module_JGLEvaluator..QuerySegment)
   * [type: JGLEvaluator~Query](#module_JGLEvaluator..Query)
   * [type: JGLEvaluator~Path](#module_JGLEvaluator..Path)
+  * [type: JGLEvaluator~Value](#module_JGLEvaluator..Value)
   * [type: JGLEvaluator~PathValue](#module_JGLEvaluator..PathValue)
 
 <a name="module_JGLEvaluator.Base"></a>
@@ -143,6 +151,10 @@ A concrete path. i.e: One that can not be expanded further.
 
 **Scope**: inner typedef of [JGLEvaluator](#module_JGLEvaluator)  
 **Type**: [Array.&lt;PathSegment&gt;](#module_JGLEvaluator..PathSegment)  
+<a name="module_JGLEvaluator..Value"></a>
+##type: JGLEvaluator~Value
+**Scope**: inner typedef of [JGLEvaluator](#module_JGLEvaluator)  
+**Type**: `Mixed` | `Error`  
 <a name="module_JGLEvaluator..PathValue"></a>
 ##type: JGLEvaluator~PathValue
 **Scope**: inner typedef of [JGLEvaluator](#module_JGLEvaluator)  
@@ -152,57 +164,124 @@ A concrete path. i.e: One that can not be expanded further.
 **Members**
 
 * [class: JGLEvaluator](#JGLEvaluator)
-  * [jGLEvaluator.get([...path])](#JGLEvaluator#get)
-  * [jGLEvaluator.set([...pv])](#JGLEvaluator#set)
-  * [jGLEvaluator.del([...path])](#JGLEvaluator#del)
+  * [new JGLEvaluator([path])](#new_JGLEvaluator)
+  * [jGLEvaluator.path](#JGLEvaluator#path)
   * [jGLEvaluator.bind(path)](#JGLEvaluator#bind)
+  * [jGLEvaluator.get([obs], [...path])](#JGLEvaluator#get)
+  * [jGLEvaluator.set([...pv], [obs])](#JGLEvaluator#set)
+  * [jGLEvaluator.del([obs], [...path])](#JGLEvaluator#del)
   * [jGLEvaluator.destroy()](#JGLEvaluator#destroy)
 
-<a name="JGLEvaluator#get"></a>
-##jGLEvaluator.get([...path])
+<a name="new_JGLEvaluator"></a>
+##new JGLEvaluator([path])
 **Params**
 
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
+- \[path=[]\] <code>[Query](#module_JGLEvaluator..Query)</code> - Optional path to pre-bind to.  
 
-**Returns**: `Rx.Observable.<module:JGLEvaluator~PathValues>`  
-<a name="JGLEvaluator#set"></a>
-##jGLEvaluator.set([...pv])
-**Params**
-
-- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLEvaluator#del"></a>
-##jGLEvaluator.del([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="JGLEvaluator#path"></a>
+##jGLEvaluator.path
 <a name="JGLEvaluator#bind"></a>
 ##jGLEvaluator.bind(path)
 **Params**
 
 - path <code>[Query](#module_JGLEvaluator..Query)</code> - The path to bind to  
 
-**Returns**: [JGLEvaluator](#JGLEvaluator) - An JGLEvaluator bound to the given path  
+**Returns**: [BoundJGLEvaluator](#BoundJGLEvaluator) - An JGLEvaluator bound to the given path  
+<a name="JGLEvaluator#get"></a>
+##jGLEvaluator.get([obs], [...path])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="JGLEvaluator#set"></a>
+##jGLEvaluator.set([...pv], [obs])
+**Params**
+
+- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
+- \[obs\] <code>[Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)</code> - An observable of path values  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="JGLEvaluator#del"></a>
+##jGLEvaluator.del([obs], [...path])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
 <a name="JGLEvaluator#destroy"></a>
 ##jGLEvaluator.destroy()
-<a name="JGLCachedEvaluator"></a>
-#class: JGLCachedEvaluator
+<a name="BoundJGLEvaluator"></a>
+#class: BoundJGLEvaluator
 **Extends**: `JGLEvaluator`  
 **Members**
 
-* [class: JGLCachedEvaluator](#JGLCachedEvaluator)
-  * [new JGLCachedEvaluator(opts)](#new_JGLCachedEvaluator)
-  * [jGLCachedEvaluator.get([...path])](#JGLCachedEvaluator#get)
-  * [jGLCachedEvaluator.set([...pv])](#JGLCachedEvaluator#set)
-  * [jGLCachedEvaluator.del([...path])](#JGLCachedEvaluator#del)
-  * [jGLCachedEvaluator.bind(path)](#JGLCachedEvaluator#bind)
-  * [jGLCachedEvaluator.destroy()](#JGLCachedEvaluator#destroy)
+* [class: BoundJGLEvaluator](#BoundJGLEvaluator)
+  * [boundJGLEvaluator.path](#BoundJGLEvaluator#path)
+  * [boundJGLEvaluator.get([obs], [...path])](#BoundJGLEvaluator#get)
+  * [boundJGLEvaluator.set([obs], [...pv])](#BoundJGLEvaluator#set)
+  * [boundJGLEvaluator.del([obs], [...path])](#BoundJGLEvaluator#del)
+  * [boundJGLEvaluator.bind(path)](#BoundJGLEvaluator#bind)
+  * [boundJGLEvaluator.destroy()](#BoundJGLEvaluator#destroy)
+  * [type: BoundJGLEvaluator~PathValue](#BoundJGLEvaluator..PathValue)
 
-<a name="new_JGLCachedEvaluator"></a>
-##new JGLCachedEvaluator(opts)
+<a name="BoundJGLEvaluator#path"></a>
+##boundJGLEvaluator.path
+<a name="BoundJGLEvaluator#get"></a>
+##boundJGLEvaluator.get([obs], [...path])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#BoundJGLEvaluator..PathValue)  
+<a name="BoundJGLEvaluator#set"></a>
+##boundJGLEvaluator.set([obs], [...pv])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)</code> - An observable of path values  
+- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#BoundJGLEvaluator..PathValue)  
+<a name="BoundJGLEvaluator#del"></a>
+##boundJGLEvaluator.del([obs], [...path])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#BoundJGLEvaluator..PathValue)  
+<a name="BoundJGLEvaluator#bind"></a>
+##boundJGLEvaluator.bind(path)
+**Params**
+
+- path <code>[Query](#module_JGLEvaluator..Query)</code> - The path to bind to  
+
+**Returns**: [BoundJGLEvaluator](#BoundJGLEvaluator) - An JGLEvaluator bound to the given path  
+<a name="BoundJGLEvaluator#destroy"></a>
+##boundJGLEvaluator.destroy()
+<a name="BoundJGLEvaluator..PathValue"></a>
+##type: BoundJGLEvaluator~PathValue
+**Scope**: inner typedef of [BoundJGLEvaluator](#BoundJGLEvaluator)  
+**Type**: [PathValue](#module_JGLEvaluator..PathValue)  
+<a name="CachedJGLEvaluator"></a>
+#class: CachedJGLEvaluator
+**Extends**: `JGLEvaluator`  
+**Members**
+
+* [class: CachedJGLEvaluator](#CachedJGLEvaluator)
+  * [new CachedJGLEvaluator(opts)](#new_CachedJGLEvaluator)
+  * [cachedJGLEvaluator.path](#CachedJGLEvaluator#path)
+  * [cachedJGLEvaluator.bind(path)](#CachedJGLEvaluator#bind)
+  * [cachedJGLEvaluator.get([obs], [...path])](#CachedJGLEvaluator#get)
+  * [cachedJGLEvaluator.set([...pv], [obs])](#CachedJGLEvaluator#set)
+  * [cachedJGLEvaluator.del([obs], [...path])](#CachedJGLEvaluator#del)
+  * [cachedJGLEvaluator.destroy()](#CachedJGLEvaluator#destroy)
+
+<a name="new_CachedJGLEvaluator"></a>
+##new CachedJGLEvaluator(opts)
 **Params**
 
 - opts `Object`  
@@ -210,264 +289,279 @@ A concrete path. i.e: One that can not be expanded further.
   - proxy <code>[JGLEvaluator](#JGLEvaluator)</code>  
 
 **Extends**: `JGLEvaluator`  
-<a name="JGLCachedEvaluator#get"></a>
-##jGLCachedEvaluator.get([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
-
-**Returns**: `Rx.Observable.<module:JGLEvaluator~PathValues>`  
-<a name="JGLCachedEvaluator#set"></a>
-##jGLCachedEvaluator.set([...pv])
-**Params**
-
-- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLCachedEvaluator#del"></a>
-##jGLCachedEvaluator.del([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLCachedEvaluator#bind"></a>
-##jGLCachedEvaluator.bind(path)
+<a name="CachedJGLEvaluator#path"></a>
+##cachedJGLEvaluator.path
+<a name="CachedJGLEvaluator#bind"></a>
+##cachedJGLEvaluator.bind(path)
 **Params**
 
 - path <code>[Query](#module_JGLEvaluator..Query)</code> - The path to bind to  
 
-**Returns**: [JGLEvaluator](#JGLEvaluator) - An JGLEvaluator bound to the given path  
-<a name="JGLCachedEvaluator#destroy"></a>
-##jGLCachedEvaluator.destroy()
-<a name="JGLMemoryEvaluator"></a>
-#class: JGLMemoryEvaluator
+**Returns**: [BoundJGLEvaluator](#BoundJGLEvaluator) - An JGLEvaluator bound to the given path  
+<a name="CachedJGLEvaluator#get"></a>
+##cachedJGLEvaluator.get([obs], [...path])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="CachedJGLEvaluator#set"></a>
+##cachedJGLEvaluator.set([...pv], [obs])
+**Params**
+
+- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
+- \[obs\] <code>[Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)</code> - An observable of path values  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="CachedJGLEvaluator#del"></a>
+##cachedJGLEvaluator.del([obs], [...path])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="CachedJGLEvaluator#destroy"></a>
+##cachedJGLEvaluator.destroy()
+<a name="MemoryJGLEvaluator"></a>
+#class: MemoryJGLEvaluator
 **Extends**: `JGLEvaluator`  
 **Members**
 
-* [class: JGLMemoryEvaluator](#JGLMemoryEvaluator)
-  * [new JGLMemoryEvaluator([graph])](#new_JGLMemoryEvaluator)
-  * [jGLMemoryEvaluator.graph](#JGLMemoryEvaluator#graph)
-  * [jGLMemoryEvaluator.destroy()](#JGLMemoryEvaluator#destroy)
-  * [jGLMemoryEvaluator.get([...path])](#JGLMemoryEvaluator#get)
-  * [jGLMemoryEvaluator.set([...pv])](#JGLMemoryEvaluator#set)
-  * [jGLMemoryEvaluator.del([...path])](#JGLMemoryEvaluator#del)
-  * [jGLMemoryEvaluator.bind(path)](#JGLMemoryEvaluator#bind)
+* [class: MemoryJGLEvaluator](#MemoryJGLEvaluator)
+  * [new MemoryJGLEvaluator([graph], [path])](#new_MemoryJGLEvaluator)
+  * [memoryJGLEvaluator.graph](#MemoryJGLEvaluator#graph)
+  * [memoryJGLEvaluator.path](#MemoryJGLEvaluator#path)
+  * [memoryJGLEvaluator.destroy()](#MemoryJGLEvaluator#destroy)
+  * [memoryJGLEvaluator.bind(path)](#MemoryJGLEvaluator#bind)
+  * [memoryJGLEvaluator.get([obs], [...path])](#MemoryJGLEvaluator#get)
+  * [memoryJGLEvaluator.set([...pv], [obs])](#MemoryJGLEvaluator#set)
+  * [memoryJGLEvaluator.del([obs], [...path])](#MemoryJGLEvaluator#del)
 
-<a name="new_JGLMemoryEvaluator"></a>
-##new JGLMemoryEvaluator([graph])
+<a name="new_MemoryJGLEvaluator"></a>
+##new MemoryJGLEvaluator([graph], [path])
 **Params**
 
 - \[graph={}\] `Object`  
+- \[path=[]\] `Object`  
 
 **Extends**: `JGLEvaluator`  
-<a name="JGLMemoryEvaluator#graph"></a>
-##jGLMemoryEvaluator.graph
+<a name="MemoryJGLEvaluator#graph"></a>
+##memoryJGLEvaluator.graph
 **Default**: `{}`  
-<a name="JGLMemoryEvaluator#destroy"></a>
-##jGLMemoryEvaluator.destroy()
-<a name="JGLMemoryEvaluator#get"></a>
-##jGLMemoryEvaluator.get([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
-
-**Returns**: `Rx.Observable.<module:JGLEvaluator~PathValues>`  
-<a name="JGLMemoryEvaluator#set"></a>
-##jGLMemoryEvaluator.set([...pv])
-**Params**
-
-- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLMemoryEvaluator#del"></a>
-##jGLMemoryEvaluator.del([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLMemoryEvaluator#bind"></a>
-##jGLMemoryEvaluator.bind(path)
+<a name="MemoryJGLEvaluator#path"></a>
+##memoryJGLEvaluator.path
+<a name="MemoryJGLEvaluator#destroy"></a>
+##memoryJGLEvaluator.destroy()
+<a name="MemoryJGLEvaluator#bind"></a>
+##memoryJGLEvaluator.bind(path)
 **Params**
 
 - path <code>[Query](#module_JGLEvaluator..Query)</code> - The path to bind to  
 
-**Returns**: [JGLEvaluator](#JGLEvaluator) - An JGLEvaluator bound to the given path  
-<a name="JGLPatternEvaluatorHandler"></a>
-#class: JGLPatternEvaluatorHandler
-**Members**
-
-* [class: JGLPatternEvaluatorHandler](#JGLPatternEvaluatorHandler)
-  * [new JGLPatternEvaluatorHandler(method, pattern, action)](#new_JGLPatternEvaluatorHandler)
-  * [jGLPatternEvaluatorHandler.method](#JGLPatternEvaluatorHandler#method)
-  * [jGLPatternEvaluatorHandler.pattern](#JGLPatternEvaluatorHandler#pattern)
-  * [jGLPatternEvaluatorHandler.parser](#JGLPatternEvaluatorHandler#parser)
-  * [jGLPatternEvaluatorHandler.run(query, [value])](#JGLPatternEvaluatorHandler#run)
-  * [jGLPatternEvaluatorHandler.match(method, query)](#JGLPatternEvaluatorHandler#match)
-  * [const: JGLPatternEvaluatorHandler.GET](#JGLPatternEvaluatorHandler.GET)
-  * [const: JGLPatternEvaluatorHandler.SET](#JGLPatternEvaluatorHandler.SET)
-  * [const: JGLPatternEvaluatorHandler.DEL](#JGLPatternEvaluatorHandler.DEL)
-  * [callback: JGLPatternEvaluatorHandler~Action](#JGLPatternEvaluatorHandler..Action)
-  * [type: JGLPatternEvaluatorHandler~Method](#JGLPatternEvaluatorHandler..Method)
-
-<a name="new_JGLPatternEvaluatorHandler"></a>
-##new JGLPatternEvaluatorHandler(method, pattern, action)
+**Returns**: [BoundJGLEvaluator](#BoundJGLEvaluator) - An JGLEvaluator bound to the given path  
+<a name="MemoryJGLEvaluator#get"></a>
+##memoryJGLEvaluator.get([obs], [...path])
 **Params**
 
-- method <code>[Method](#JGLPatternEvaluatorHandler..Method)</code>  
-- pattern <code>[Pattern](#JGLPatternEvaluatorParser..Pattern)</code>  
-- action <code>[Action](#JGLPatternEvaluatorHandler..Action)</code>  
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
 
-<a name="JGLPatternEvaluatorHandler#method"></a>
-##jGLPatternEvaluatorHandler.method
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="MemoryJGLEvaluator#set"></a>
+##memoryJGLEvaluator.set([...pv], [obs])
+**Params**
+
+- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
+- \[obs\] <code>[Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)</code> - An observable of path values  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="MemoryJGLEvaluator#del"></a>
+##memoryJGLEvaluator.del([obs], [...path])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="PatternJGLEvaluatorHandler"></a>
+#class: PatternJGLEvaluatorHandler
+**Members**
+
+* [class: PatternJGLEvaluatorHandler](#PatternJGLEvaluatorHandler)
+  * [new PatternJGLEvaluatorHandler(method, pattern, action)](#new_PatternJGLEvaluatorHandler)
+  * [patternJGLEvaluatorHandler.method](#PatternJGLEvaluatorHandler#method)
+  * [patternJGLEvaluatorHandler.pattern](#PatternJGLEvaluatorHandler#pattern)
+  * [patternJGLEvaluatorHandler.parser](#PatternJGLEvaluatorHandler#parser)
+  * [patternJGLEvaluatorHandler.run(query, [value])](#PatternJGLEvaluatorHandler#run)
+  * [patternJGLEvaluatorHandler.match(method, query)](#PatternJGLEvaluatorHandler#match)
+  * [const: PatternJGLEvaluatorHandler.GET](#PatternJGLEvaluatorHandler.GET)
+  * [const: PatternJGLEvaluatorHandler.SET](#PatternJGLEvaluatorHandler.SET)
+  * [const: PatternJGLEvaluatorHandler.DEL](#PatternJGLEvaluatorHandler.DEL)
+  * [callback: PatternJGLEvaluatorHandler~Action](#PatternJGLEvaluatorHandler..Action)
+  * [type: PatternJGLEvaluatorHandler~Method](#PatternJGLEvaluatorHandler..Method)
+
+<a name="new_PatternJGLEvaluatorHandler"></a>
+##new PatternJGLEvaluatorHandler(method, pattern, action)
+**Params**
+
+- method <code>[Method](#PatternJGLEvaluatorHandler..Method)</code>  
+- pattern <code>[Pattern](#PatternJGLEvaluatorParser..Pattern)</code>  
+- action <code>[Action](#PatternJGLEvaluatorHandler..Action)</code>  
+
+<a name="PatternJGLEvaluatorHandler#method"></a>
+##patternJGLEvaluatorHandler.method
 The method to use: 'get', 'set', or 'del'
 
-**Type**: [Method](#JGLPatternEvaluatorHandler..Method)  
-<a name="JGLPatternEvaluatorHandler#pattern"></a>
-##jGLPatternEvaluatorHandler.pattern
+<a name="PatternJGLEvaluatorHandler#pattern"></a>
+##patternJGLEvaluatorHandler.pattern
 The un-parsed pattern
 
-**Type**: `JGLPatternEvaluatorHandler~Pattern`  
-<a name="JGLPatternEvaluatorHandler#parser"></a>
-##jGLPatternEvaluatorHandler.parser
-The [JGLPatternEvaluatorParser](#JGLPatternEvaluatorParser) instance used for determining if the
+<a name="PatternJGLEvaluatorHandler#parser"></a>
+##patternJGLEvaluatorHandler.parser
+The [PatternJGLEvaluatorParser](#PatternJGLEvaluatorParser) instance used for determining if the
 handler handles a particular query
 
-**Type**: [JGLPatternEvaluatorParser](#JGLPatternEvaluatorParser)  
-<a name="JGLPatternEvaluatorHandler#run"></a>
-##jGLPatternEvaluatorHandler.run(query, [value])
+<a name="PatternJGLEvaluatorHandler#run"></a>
+##patternJGLEvaluatorHandler.run(query, [value])
 **Params**
 
 - query `Array.<Array.<(Integer|String)>>`  
 - \[value\] `Mixed`  
 
 **Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLPatternEvaluatorHandler#match"></a>
-##jGLPatternEvaluatorHandler.match(method, query)
+<a name="PatternJGLEvaluatorHandler#match"></a>
+##patternJGLEvaluatorHandler.match(method, query)
 **Params**
 
 - method `String`  
 - query <code>[Query](#module_JGLEvaluator..Query)</code>  
 
 **Returns**: `Array.<Array.<(String|Integer)>>`  
-<a name="JGLPatternEvaluatorHandler.GET"></a>
-##const: JGLPatternEvaluatorHandler.GET
-<a name="JGLPatternEvaluatorHandler.SET"></a>
-##const: JGLPatternEvaluatorHandler.SET
-<a name="JGLPatternEvaluatorHandler.DEL"></a>
-##const: JGLPatternEvaluatorHandler.DEL
-<a name="JGLPatternEvaluatorHandler..Action"></a>
-##callback: JGLPatternEvaluatorHandler~Action
+<a name="PatternJGLEvaluatorHandler.GET"></a>
+##const: PatternJGLEvaluatorHandler.GET
+<a name="PatternJGLEvaluatorHandler.SET"></a>
+##const: PatternJGLEvaluatorHandler.SET
+<a name="PatternJGLEvaluatorHandler.DEL"></a>
+##const: PatternJGLEvaluatorHandler.DEL
+<a name="PatternJGLEvaluatorHandler..Action"></a>
+##callback: PatternJGLEvaluatorHandler~Action
 **Params**
 
 - query `Array.<Array.<(Integer|String)>>`  
 - \[value\] `Mixed`  
 
-**Scope**: inner typedef of [JGLPatternEvaluatorHandler](#JGLPatternEvaluatorHandler)  
+**Scope**: inner typedef of [PatternJGLEvaluatorHandler](#PatternJGLEvaluatorHandler)  
 **Type**: `function`  
 **Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLPatternEvaluatorHandler..Method"></a>
-##type: JGLPatternEvaluatorHandler~Method
-**Scope**: inner typedef of [JGLPatternEvaluatorHandler](#JGLPatternEvaluatorHandler)  
-**Type**: [GET](#JGLPatternEvaluatorHandler.GET) | [SET](#JGLPatternEvaluatorHandler.SET) | [DEL](#JGLPatternEvaluatorHandler.DEL)  
-<a name="JGLPatternEvaluator"></a>
-#class: JGLPatternEvaluator
+<a name="PatternJGLEvaluatorHandler..Method"></a>
+##type: PatternJGLEvaluatorHandler~Method
+**Scope**: inner typedef of [PatternJGLEvaluatorHandler](#PatternJGLEvaluatorHandler)  
+**Type**: [GET](#PatternJGLEvaluatorHandler.GET) | [SET](#PatternJGLEvaluatorHandler.SET) | [DEL](#PatternJGLEvaluatorHandler.DEL)  
+<a name="PatternJGLEvaluator"></a>
+#class: PatternJGLEvaluator
 **Extends**: `JGLEvaluator`  
 **Members**
 
-* [class: JGLPatternEvaluator](#JGLPatternEvaluator)
-  * [new JGLPatternEvaluator(...handler)](#new_JGLPatternEvaluator)
-  * [JGLPatternEvaluator.Parser](#JGLPatternEvaluator.Parser)
-  * [JGLPatternEvaluator.Handler](#JGLPatternEvaluator.Handler)
-  * [jGLPatternEvaluator.handle(handlerOrMethod, [pattern], [action])](#JGLPatternEvaluator#handle)
-  * [jGLPatternEvaluator.get([...path])](#JGLPatternEvaluator#get)
-  * [jGLPatternEvaluator.set([...pv])](#JGLPatternEvaluator#set)
-  * [jGLPatternEvaluator.del([...path])](#JGLPatternEvaluator#del)
-  * [jGLPatternEvaluator.bind(path)](#JGLPatternEvaluator#bind)
-  * [jGLPatternEvaluator.destroy()](#JGLPatternEvaluator#destroy)
+* [class: PatternJGLEvaluator](#PatternJGLEvaluator)
+  * [new PatternJGLEvaluator(...handler)](#new_PatternJGLEvaluator)
+  * [PatternJGLEvaluator.Parser](#PatternJGLEvaluator.Parser)
+  * [PatternJGLEvaluator.Handler](#PatternJGLEvaluator.Handler)
+  * [patternJGLEvaluator.path](#PatternJGLEvaluator#path)
+  * [patternJGLEvaluator.handle(handlerOrMethod, [pattern], [action])](#PatternJGLEvaluator#handle)
+  * [patternJGLEvaluator.bind(path)](#PatternJGLEvaluator#bind)
+  * [patternJGLEvaluator.get([obs], [...path])](#PatternJGLEvaluator#get)
+  * [patternJGLEvaluator.set([...pv], [obs])](#PatternJGLEvaluator#set)
+  * [patternJGLEvaluator.del([obs], [...path])](#PatternJGLEvaluator#del)
+  * [patternJGLEvaluator.destroy()](#PatternJGLEvaluator#destroy)
 
-<a name="new_JGLPatternEvaluator"></a>
-##new JGLPatternEvaluator(...handler)
+<a name="new_PatternJGLEvaluator"></a>
+##new PatternJGLEvaluator(...handler)
 **Params**
 
-- ...handler <code>[JGLPatternEvaluatorHandler](#JGLPatternEvaluatorHandler)</code>  
+- ...handler <code>[PatternJGLEvaluatorHandler](#PatternJGLEvaluatorHandler)</code>  
 
 **Extends**: `JGLEvaluator`  
-<a name="JGLPatternEvaluator.Parser"></a>
-##JGLPatternEvaluator.Parser
-<a name="JGLPatternEvaluator.Handler"></a>
-##JGLPatternEvaluator.Handler
-<a name="JGLPatternEvaluator#handle"></a>
-##jGLPatternEvaluator.handle(handlerOrMethod, [pattern], [action])
-Add a new handler for a JGLEvaluatorndPoint
+<a name="PatternJGLEvaluator.Parser"></a>
+##PatternJGLEvaluator.Parser
+<a name="PatternJGLEvaluator.Handler"></a>
+##PatternJGLEvaluator.Handler
+<a name="PatternJGLEvaluator#path"></a>
+##patternJGLEvaluator.path
+<a name="PatternJGLEvaluator#handle"></a>
+##patternJGLEvaluator.handle(handlerOrMethod, [pattern], [action])
+Add a new handler for a JGLEvaluatorEndPoint
 
 **Params**
 
-- handlerOrMethod <code>[JGLPatternEvaluatorHandler](#JGLPatternEvaluatorHandler)</code> | <code>[Method](#JGLPatternEvaluatorHandler..Method)</code>  
-- \[pattern\] `JGLEvaluatorPatternParser~Pattern`  
-- \[action\] <code>[Action](#JGLPatternEvaluatorHandler..Action)</code>  
+- handlerOrMethod <code>[PatternJGLEvaluatorHandler](#PatternJGLEvaluatorHandler)</code> | <code>[Method](#PatternJGLEvaluatorHandler..Method)</code>  
+- \[pattern\] <code>[Pattern](#PatternJGLEvaluatorParser..Pattern)</code>  
+- \[action\] <code>[Action](#PatternJGLEvaluatorHandler..Action)</code>  
 
-**Returns**: [JGLPatternEvaluator](#JGLPatternEvaluator) - The current instance  
-<a name="JGLPatternEvaluator#get"></a>
-##jGLPatternEvaluator.get([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
-
-**Returns**: `Rx.Observable.<module:JGLEvaluator~PathValues>`  
-<a name="JGLPatternEvaluator#set"></a>
-##jGLPatternEvaluator.set([...pv])
-**Params**
-
-- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLPatternEvaluator#del"></a>
-##jGLPatternEvaluator.del([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLPatternEvaluator#bind"></a>
-##jGLPatternEvaluator.bind(path)
+**Returns**: [PatternJGLEvaluator](#PatternJGLEvaluator) - The current instance  
+<a name="PatternJGLEvaluator#bind"></a>
+##patternJGLEvaluator.bind(path)
 **Params**
 
 - path <code>[Query](#module_JGLEvaluator..Query)</code> - The path to bind to  
 
-**Returns**: [JGLEvaluator](#JGLEvaluator) - An JGLEvaluator bound to the given path  
-<a name="JGLPatternEvaluator#destroy"></a>
-##jGLPatternEvaluator.destroy()
-<a name="JGLPatternEvaluatorParser"></a>
-#class: JGLPatternEvaluatorParser
-**Members**
-
-* [class: JGLPatternEvaluatorParser](#JGLPatternEvaluatorParser)
-  * [new JGLPatternEvaluatorParser(...segment)](#new_JGLPatternEvaluatorParser)
-  * [jGLPatternEvaluatorParser.segments](#JGLPatternEvaluatorParser#segments)
-  * [JGLPatternEvaluatorParser.isInteger](#JGLPatternEvaluatorParser.isInteger)
-  * [JGLPatternEvaluatorParser.isIntegers](#JGLPatternEvaluatorParser.isIntegers)
-  * [JGLPatternEvaluatorParser.isRange](#JGLPatternEvaluatorParser.isRange)
-  * [JGLPatternEvaluatorParser.isIntegersOrRange](#JGLPatternEvaluatorParser.isIntegersOrRange)
-  * [JGLPatternEvaluatorParser.isKey](#JGLPatternEvaluatorParser.isKey)
-  * [JGLPatternEvaluatorParser.isKeys](#JGLPatternEvaluatorParser.isKeys)
-  * [jGLPatternEvaluatorParser.match(query)](#JGLPatternEvaluatorParser#match)
-  * [const: JGLPatternEvaluatorParser.KEYS](#JGLPatternEvaluatorParser.KEYS)
-  * [const: JGLPatternEvaluatorParser.INTEGERS](#JGLPatternEvaluatorParser.INTEGERS)
-  * [type: JGLPatternEvaluatorParser~Argument](#JGLPatternEvaluatorParser..Argument)
-  * [type: JGLPatternEvaluatorParser~Pattern](#JGLPatternEvaluatorParser..Pattern)
-
-<a name="new_JGLPatternEvaluatorParser"></a>
-##new JGLPatternEvaluatorParser(...segment)
+**Returns**: [BoundJGLEvaluator](#BoundJGLEvaluator) - An JGLEvaluator bound to the given path  
+<a name="PatternJGLEvaluator#get"></a>
+##patternJGLEvaluator.get([obs], [...path])
 **Params**
 
-- ...segment <code>[Argument](#JGLPatternEvaluatorParser..Argument)</code>  
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
 
-<a name="JGLPatternEvaluatorParser#segments"></a>
-##jGLPatternEvaluatorParser.segments
-<a name="JGLPatternEvaluatorParser.isInteger"></a>
-##JGLPatternEvaluatorParser.isInteger
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="PatternJGLEvaluator#set"></a>
+##patternJGLEvaluator.set([...pv], [obs])
+**Params**
+
+- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
+- \[obs\] <code>[Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)</code> - An observable of path values  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="PatternJGLEvaluator#del"></a>
+##patternJGLEvaluator.del([obs], [...path])
+**Params**
+
+- \[obs\] <code>[Rx.Observable.&lt;Query&gt;](#module_JGLEvaluator..Query)</code> - An observable of paths  
+- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
+
+**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
+<a name="PatternJGLEvaluator#destroy"></a>
+##patternJGLEvaluator.destroy()
+<a name="PatternJGLEvaluatorParser"></a>
+#class: PatternJGLEvaluatorParser
+**Members**
+
+* [class: PatternJGLEvaluatorParser](#PatternJGLEvaluatorParser)
+  * [new PatternJGLEvaluatorParser(...segment)](#new_PatternJGLEvaluatorParser)
+  * [patternJGLEvaluatorParser.segments](#PatternJGLEvaluatorParser#segments)
+  * [PatternJGLEvaluatorParser.isInteger(val)](#PatternJGLEvaluatorParser.isInteger)
+  * [PatternJGLEvaluatorParser.isIntegers(val)](#PatternJGLEvaluatorParser.isIntegers)
+  * [PatternJGLEvaluatorParser.isRange(val)](#PatternJGLEvaluatorParser.isRange)
+  * [PatternJGLEvaluatorParser.isIntegersOrRange(val)](#PatternJGLEvaluatorParser.isIntegersOrRange)
+  * [PatternJGLEvaluatorParser.isKey(val)](#PatternJGLEvaluatorParser.isKey)
+  * [PatternJGLEvaluatorParser.isKeys(val)](#PatternJGLEvaluatorParser.isKeys)
+  * [patternJGLEvaluatorParser.match(query)](#PatternJGLEvaluatorParser#match)
+  * [const: PatternJGLEvaluatorParser.KEYS](#PatternJGLEvaluatorParser.KEYS)
+  * [const: PatternJGLEvaluatorParser.INTEGERS](#PatternJGLEvaluatorParser.INTEGERS)
+  * [type: PatternJGLEvaluatorParser~Argument](#PatternJGLEvaluatorParser..Argument)
+  * [type: PatternJGLEvaluatorParser~Pattern](#PatternJGLEvaluatorParser..Pattern)
+
+<a name="new_PatternJGLEvaluatorParser"></a>
+##new PatternJGLEvaluatorParser(...segment)
+**Params**
+
+- ...segment <code>[Argument](#PatternJGLEvaluatorParser..Argument)</code>  
+
+<a name="PatternJGLEvaluatorParser#segments"></a>
+##patternJGLEvaluatorParser.segments
+<a name="PatternJGLEvaluatorParser.isInteger"></a>
+##PatternJGLEvaluatorParser.isInteger(val)
 Determines if the given value is an integer.
 
 **Params**
@@ -475,8 +569,8 @@ Determines if the given value is an integer.
 - val `Mixed`  
 
 **Returns**: `Boolean`  
-<a name="JGLPatternEvaluatorParser.isIntegers"></a>
-##JGLPatternEvaluatorParser.isIntegers
+<a name="PatternJGLEvaluatorParser.isIntegers"></a>
+##PatternJGLEvaluatorParser.isIntegers(val)
 Determines if the given value is an array of integers.
 
 **Params**
@@ -484,8 +578,8 @@ Determines if the given value is an array of integers.
 - val `Mixed`  
 
 **Returns**: `Boolean`  
-<a name="JGLPatternEvaluatorParser.isRange"></a>
-##JGLPatternEvaluatorParser.isRange
+<a name="PatternJGLEvaluatorParser.isRange"></a>
+##PatternJGLEvaluatorParser.isRange(val)
 Determines is the given value is a range.
 
 **Params**
@@ -493,8 +587,8 @@ Determines is the given value is a range.
 - val `Mixed`  
 
 **Returns**: `Boolean`  
-<a name="JGLPatternEvaluatorParser.isIntegersOrRange"></a>
-##JGLPatternEvaluatorParser.isIntegersOrRange
+<a name="PatternJGLEvaluatorParser.isIntegersOrRange"></a>
+##PatternJGLEvaluatorParser.isIntegersOrRange(val)
 Determines if the given value is an integer or a range
 
 **Params**
@@ -502,8 +596,8 @@ Determines if the given value is an integer or a range
 - val `Mixed`  
 
 **Returns**: `Boolean`  
-<a name="JGLPatternEvaluatorParser.isKey"></a>
-##JGLPatternEvaluatorParser.isKey
+<a name="PatternJGLEvaluatorParser.isKey"></a>
+##PatternJGLEvaluatorParser.isKey(val)
 Determines is the given value is a string key
 
 **Params**
@@ -511,8 +605,8 @@ Determines is the given value is a string key
 - val `Mixed`  
 
 **Returns**: `Boolean`  
-<a name="JGLPatternEvaluatorParser.isKeys"></a>
-##JGLPatternEvaluatorParser.isKeys
+<a name="PatternJGLEvaluatorParser.isKeys"></a>
+##PatternJGLEvaluatorParser.isKeys(val)
 Determines if the given val is an array of keys.
 
 **Params**
@@ -520,8 +614,8 @@ Determines if the given val is an array of keys.
 - val `Mixed`  
 
 **Returns**: `Boolean`  
-<a name="JGLPatternEvaluatorParser#match"></a>
-##jGLPatternEvaluatorParser.match(query)
+<a name="PatternJGLEvaluatorParser#match"></a>
+##patternJGLEvaluatorParser.match(query)
 Takes in a [Query](#module_JGLEvaluator..Query) and returns a list of keys matched for
 each segment of the query. If the parser does not match the query, false is
 returned.
@@ -531,65 +625,15 @@ returned.
 - query <code>[Query](#module_JGLEvaluator..Query)</code>  
 
 **Returns**: `Array.<Array.<(String|Integer)>>` | `Boolean`  
-<a name="JGLPatternEvaluatorParser.KEYS"></a>
-##const: JGLPatternEvaluatorParser.KEYS
-<a name="JGLPatternEvaluatorParser.INTEGERS"></a>
-##const: JGLPatternEvaluatorParser.INTEGERS
-<a name="JGLPatternEvaluatorParser..Argument"></a>
-##type: JGLPatternEvaluatorParser~Argument
-**Scope**: inner typedef of [JGLPatternEvaluatorParser](#JGLPatternEvaluatorParser)  
-**Type**: `String` | `Array.<String>` | `Integer` | `Array.<Integer>` | [Range](#module_JGLEvaluator..Range)  
-<a name="JGLPatternEvaluatorParser..Pattern"></a>
-##type: JGLPatternEvaluatorParser~Pattern
-**Scope**: inner typedef of [JGLPatternEvaluatorParser](#JGLPatternEvaluatorParser)  
-**Type**: [Array.&lt;Argument&gt;](#JGLPatternEvaluatorParser..Argument)  
-<a name="JGLRelativeEvaluator"></a>
-#class: JGLRelativeEvaluator
-**Extends**: `JGLEvaluator`  
-**Members**
-
-* [class: JGLRelativeEvaluator](#JGLRelativeEvaluator)
-  * [new JGLRelativeEvaluator(proxy)](#new_JGLRelativeEvaluator)
-  * [jGLRelativeEvaluator.get([...path])](#JGLRelativeEvaluator#get)
-  * [jGLRelativeEvaluator.set([...pv])](#JGLRelativeEvaluator#set)
-  * [jGLRelativeEvaluator.del([...path])](#JGLRelativeEvaluator#del)
-  * [jGLRelativeEvaluator.bind(path)](#JGLRelativeEvaluator#bind)
-  * [jGLRelativeEvaluator.destroy()](#JGLRelativeEvaluator#destroy)
-
-<a name="new_JGLRelativeEvaluator"></a>
-##new JGLRelativeEvaluator(proxy)
-**Params**
-
-- proxy `Object`  
-
-**Extends**: `JGLEvaluator`  
-<a name="JGLRelativeEvaluator#get"></a>
-##jGLRelativeEvaluator.get([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to retrieve  
-
-**Returns**: `Rx.Observable.<module:JGLEvaluator~PathValues>`  
-<a name="JGLRelativeEvaluator#set"></a>
-##jGLRelativeEvaluator.set([...pv])
-**Params**
-
-- \[...pv\] <code>[PathValue](#module_JGLEvaluator..PathValue)</code> - One or more path-values to set  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLRelativeEvaluator#del"></a>
-##jGLRelativeEvaluator.del([...path])
-**Params**
-
-- \[...path\] <code>[Query](#module_JGLEvaluator..Query)</code> - One or more paths to delete  
-
-**Returns**: [Rx.Observable.&lt;PathValue&gt;](#module_JGLEvaluator..PathValue)  
-<a name="JGLRelativeEvaluator#bind"></a>
-##jGLRelativeEvaluator.bind(path)
-**Params**
-
-- path <code>[Query](#module_JGLEvaluator..Query)</code> - The path to bind to  
-
-**Returns**: [JGLEvaluator](#JGLEvaluator) - An JGLEvaluator bound to the given path  
-<a name="JGLRelativeEvaluator#destroy"></a>
-##jGLRelativeEvaluator.destroy()
+<a name="PatternJGLEvaluatorParser.KEYS"></a>
+##const: PatternJGLEvaluatorParser.KEYS
+<a name="PatternJGLEvaluatorParser.INTEGERS"></a>
+##const: PatternJGLEvaluatorParser.INTEGERS
+<a name="PatternJGLEvaluatorParser..Argument"></a>
+##type: PatternJGLEvaluatorParser~Argument
+**Scope**: inner typedef of [PatternJGLEvaluatorParser](#PatternJGLEvaluatorParser)  
+**Type**: `String` | `Array.<String>` | `Integer` | `Array.<Integer>` | [Range](#module_JGLEvaluator..Range) | [KEYS](#PatternJGLEvaluatorParser.KEYS) | [INTEGERS](#PatternJGLEvaluatorParser.INTEGERS)  
+<a name="PatternJGLEvaluatorParser..Pattern"></a>
+##type: PatternJGLEvaluatorParser~Pattern
+**Scope**: inner typedef of [PatternJGLEvaluatorParser](#PatternJGLEvaluatorParser)  
+**Type**: [Array.&lt;Argument&gt;](#PatternJGLEvaluatorParser..Argument)  
