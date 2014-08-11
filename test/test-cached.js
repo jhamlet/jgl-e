@@ -65,7 +65,7 @@ describe('CachedJGLEvaluator', function () {
             );
     });
 
-    it.only('should fetch from the cache, and then the proxy', function (done) {
+    it('should fetch from the cache, and then the proxy', function (done) {
         var expected = {
                 foo: {
                     bar: {
